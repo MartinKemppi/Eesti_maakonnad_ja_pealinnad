@@ -1,0 +1,15 @@
+﻿Harju maakond:Tallinn
+Hiiu maakond:Hiiumaa
+Ida-Viru maakond:Jõhvi
+Jõgeva maakond:Jõgeva
+Järva maakond:Paide
+Lääne maakond:Haapsalu
+Lääne-Viru maakond:Rakvere
+Põlva maakond:Põlva
+Pärnu maakond:Pärnu
+Rapla maakond:Rapla
+Saare maakond:Kuresaare
+Tartu maakond:Tartu
+Valga maakond:Valga
+Viljandi maakond:Viljandi
+Võru maakond:Võru
