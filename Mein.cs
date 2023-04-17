@@ -146,7 +146,7 @@ namespace Alamprogrammid
             */
 
             string filePath = @"C:\Users\user\source\repos\Alamprogrammid-master\Eesti.txt";
-            Dictionary<string, string> maakonnad = LoadDictionaryFromFile(filePath);
+            Dictionary<string, string> maakonnad = LoeDictFailist(filePath);
 
             Console.WriteLine("Sisesta 'help' saadaolevate käskude kuvamiseks.");
 
@@ -169,15 +169,15 @@ namespace Alamprogrammid
                     {
                         Console.WriteLine();
                         Console.WriteLine("Maakonnad:");
-                        foreach (KeyValuePair<string, string> county in maakonnad)
+                        foreach (KeyValuePair<string, string> maakond in maakonnad)
                         {
-                            Console.WriteLine($"  {county.Key}");
+                            Console.WriteLine($"  {maakond.Key}");
                         }
                         Console.WriteLine();
                         Console.WriteLine("Pealinnad:");
-                        foreach (KeyValuePair<string, string> county in maakonnad)
+                        foreach (KeyValuePair<string, string> maakond in maakonnad)
                         {
-                            Console.WriteLine($"  {county.Value}");
+                            Console.WriteLine($"  {maakond.Value}");
                         }
                         Console.WriteLine();
                 }
@@ -202,7 +202,7 @@ namespace Alamprogrammid
                     {
                         Random random = new Random();
                         List<string> countyList = new List<string>(maakonnad.Keys);
-                        int score = 0;
+                        int tulemus = 0;
 
                         Console.WriteLine("Sisestage iga maakonna pealinn.");
                         for (int i = 0; i < 10; i++)
@@ -213,14 +213,14 @@ namespace Alamprogrammid
                             if (answer == maakonnad[county])
                             {
                                 Console.WriteLine("Õige!");
-                                score++;
+                                tulemus++;
                             }
                             else
                             {
                                 Console.WriteLine($"Vale. Õige vastus on {maakonnad[county]}.");
                             }
                         }
-                        Console.WriteLine($"Said {score} 10-st ({score * 10}%).");
+                        Console.WriteLine($"Said {tulemus} 10-st ({tulemus * 10}%).");
                     }
                 else if (input == "otsi")
                 {
@@ -263,14 +263,14 @@ namespace Alamprogrammid
                 }
                 else
                     {
-                        AddCountyToDictionary(maakonnad, input);
+                        LisaMaakondDict(maakonnad, input);
                     }
 
                 }
                 
             }
 
-        static Dictionary<string, string> LoadDictionaryFromFile(string filename)
+        static Dictionary<string, string> LoeDictFailist(string filename)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
@@ -300,7 +300,7 @@ namespace Alamprogrammid
             return dictionary;
         }
 
-        static void AddCountyToDictionary(Dictionary<string, string> counties, string input)
+        static void LisaMaakondDict(Dictionary<string, string> counties, string input)
         {
             Console.WriteLine($"Ei leidnud '{input}' sõnastikus.");
 
