@@ -155,49 +155,25 @@ namespace Alamprogrammid
                     Console.Write("Sisestage käsk: ");
                     string input = Console.ReadLine().Trim().ToLower();
 
-                    if (input == "help")
-                    {
-                        Console.WriteLine("Saadaolevad käsud:");
-                        Console.WriteLine("  help - kuvab see abiteade");
-                        Console.WriteLine("  list - loetlege sõnastikus kõik maakonnad");
-                        Console.WriteLine("  otsi - otsib maakonna või pealinna");
-                        Console.WriteLine("  <maakond> - näita maakonna pealinna");
-                        Console.WriteLine("  <riik> - kuva maakond pealinna jaoks");
-                        Console.WriteLine("  test - alustada teadmiste kontrolli maakonna ja pealinna nimede kohta");
-                    }
-                    else if (input == "list")
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine("Maakonnad:");
-                        foreach (KeyValuePair<string, string> maakond in maakonnad)
-                        {
-                            Console.WriteLine($"  {maakond.Key}");
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine("Pealinnad:");
-                        foreach (KeyValuePair<string, string> maakond in maakonnad)
-                        {
-                            Console.WriteLine($"  {maakond.Value}");
-                        }
-                        Console.WriteLine();
+                if (input == "help")
+                {
+                    Console.WriteLine("Saadaolevad käsud:");
+                    Console.WriteLine("  help - kuvab see abiteade");
+                    Console.WriteLine("  list - näitab maakonnad ja nende pealinnad");
+                    Console.WriteLine("  otsi - otsib maakonna või pealinna");
+                    Console.WriteLine("  juhul kui te näete, et maakonna pole või tema pealinna, kirjutage selle ise ja lisate neid sõnastiku ");
+                    Console.WriteLine("  test - alustada teadmiste kontrolli maakonna ja pealinna nimede kohta");
                 }
-                    else if (maakonnad.ContainsKey(input))
+                else if (input == "list")
+                {
+                    Console.WriteLine();
+                    foreach (KeyValuePair<string, string> maakond in maakonnad)
                     {
-                        Console.WriteLine($"{maakonnad[input]} on pealinn {input}.");
+                        Console.WriteLine($"  {maakond.Key} : {maakond.Value}");
                     }
-                    else if (maakonnad.ContainsValue(input))
-                    {
-                        string maakond = "";
-                        foreach (KeyValuePair<string, string> kvp in maakonnad)
-                        {
-                            if (kvp.Value == input)
-                            {
-                                maakond = kvp.Key;
-                                break;
-                            }
-                        }
-                        Console.WriteLine($"{input} on pealinn {maakond}.");
-                    }
+                    Console.WriteLine();
+                }               
+                                        
                     else if (input == "test")
                     {
                         Random random = new Random();
@@ -288,31 +264,31 @@ namespace Alamprogrammid
                     }
                     else
                     {
-                        Console.WriteLine($"Error: Invalid format on line '{line}'.");
+                        Console.WriteLine($"Viga: Vale vorming real '{line}'.");
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"Error: File not found '{filename}'.");
+                Console.WriteLine($"Viga: fail ei leitud '{filename}'.");
             }
 
             return dictionary;
         }
 
-        static void LisaMaakondDict(Dictionary<string, string> counties, string input)
+        static void LisaMaakondDict(Dictionary<string, string> maakonnad, string input)
         {
             Console.WriteLine($"Ei leidnud '{input}' sõnastikus.");
 
             Console.Write("Sisestage maakonna nimi: ");
-            string county = Console.ReadLine().Trim();
+            string maakond = Console.ReadLine().Trim();
 
             Console.Write("Sisestage pealinna nimi: ");
-            string city = Console.ReadLine().Trim();
+            string pealinn = Console.ReadLine().Trim();
 
-            counties[county] = city;
+            maakonnad[maakond] = pealinn;
 
-            Console.WriteLine($"Lisatud '{county}' pealinnaga '{city}' sõnaraamatusse.");
+            Console.WriteLine($"Lisatud '{maakond}' pealinnaga '{pealinn}' sõnastiku.");
         }
     }
 }
