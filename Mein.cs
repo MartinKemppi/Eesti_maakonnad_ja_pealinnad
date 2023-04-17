@@ -157,12 +157,7 @@ namespace Alamprogrammid
 
                 if (input == "help")
                 {
-                    Console.WriteLine("Saadaolevad käsud:");
-                    Console.WriteLine("  help - kuvab see abiteade");
-                    Console.WriteLine("  list - näitab maakonnad ja nende pealinnad");
-                    Console.WriteLine("  otsi - otsib maakonna või pealinna");
-                    Console.WriteLine("  juhul kui te näete, et maakonna pole või tema pealinna, kirjutage selle ise ja lisate neid sõnastiku ");
-                    Console.WriteLine("  test - alustada teadmiste kontrolli maakonna ja pealinna nimede kohta");
+                    Console.WriteLine("Saadaolevad käsud:\n  help - kuvab see abiteade\n  list - näitab maakonnad ja nende pealinnad\n  otsi - otsib maakonna või pealinna\n  test - alustada teadmiste kontrolli maakonna ja pealinna nimede kohta\n  lisa - lisab maakonna ja tema pealinna sõnastiku ");
                 }
                 else if (input == "list")
                 {
@@ -172,32 +167,32 @@ namespace Alamprogrammid
                         Console.WriteLine($"  {maakond.Key} : {maakond.Value}");
                     }
                     Console.WriteLine();
-                }               
-                                        
-                    else if (input == "test")
-                    {
-                        Random random = new Random();
-                        List<string> countyList = new List<string>(maakonnad.Keys);
-                        int tulemus = 0;
+                }
 
-                        Console.WriteLine("Sisestage iga maakonna pealinn.");
-                        for (int i = 0; i < 10; i++)
+                else if (input == "test")
+                {
+                    Random random = new Random();
+                    List<string> countyList = new List<string>(maakonnad.Keys);
+                    int tulemus = 0;
+
+                    Console.WriteLine("Sisestage iga maakonna pealinn.");
+                    for (int i = 0; i < 10; i++)
+                    {
+                        string county = countyList[random.Next(countyList.Count)];
+                        Console.Write($"{county}: ");
+                        string answer = Console.ReadLine().Trim();
+                        if (answer == maakonnad[county])
                         {
-                            string county = countyList[random.Next(countyList.Count)];
-                            Console.Write($"{county}: ");
-                            string answer = Console.ReadLine().Trim();
-                            if (answer == maakonnad[county])
-                            {
-                                Console.WriteLine("Õige!");
-                                tulemus++;
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Vale. Õige vastus on {maakonnad[county]}.");
-                            }
+                            Console.WriteLine("Õige!");
+                            tulemus++;
                         }
-                        Console.WriteLine($"Said {tulemus} 10-st ({tulemus * 10}%).");
+                        else
+                        {
+                            Console.WriteLine($"Vale. Õige vastus on {maakonnad[county]}.");
+                        }
                     }
+                    Console.WriteLine($"Said {tulemus} 10-st ({tulemus * 10}%).");
+                }
                 else if (input == "otsi")
                 {
                     Console.Write("Kas soovite otsida maakonna või pealinna järgi? (sisestage 'maakond' või 'pealinn'): ");
@@ -237,12 +232,17 @@ namespace Alamprogrammid
                         Console.WriteLine($"Vale sisend '{Otsime}'. Palun sisestage 'maakond' või 'pealinn'.");
                     }
                 }
-                else
-                    {
-                        LisaMaakondDict(maakonnad, input);
-                    }
-
+                else if (input == "lisa")
+                {
+                    LisaMaakondDict(maakonnad, input);
                 }
+                                    
+                else
+                {
+                    Console.WriteLine("Kirjuta ainult need sõnad mis on ettevalmistatud");
+                }                 
+                    
+               }
                 
             }
 
@@ -278,7 +278,6 @@ namespace Alamprogrammid
 
         static void LisaMaakondDict(Dictionary<string, string> maakonnad, string input)
         {
-            Console.WriteLine($"Ei leidnud '{input}' sõnastikus.");
 
             Console.Write("Sisestage maakonna nimi: ");
             string maakond = Console.ReadLine().Trim();
